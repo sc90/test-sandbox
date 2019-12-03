@@ -46,6 +46,7 @@ const reducer = handleActions(
 );
 export default reducer;
 
+//Selector
 export const selectExhangeRate = state => state.exchangeRate;
 export const selectExchangeCurrency = state => state.exchangeCurrency;
 export const selectBaseCurrency = state => state.baseCurrency;
