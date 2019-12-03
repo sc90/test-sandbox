@@ -1,3 +1,6 @@
 export const ADD_TODO = "ADD_TODO";
 export const TOGGLE_TODO = "TOGGLE_TODO";
 export const SET_FILTER = "SET_FILTER";
+export const SET_EXCHANGE_RATE = "SET_EXCHANGE_RATE";
+export const SET_BASE_CURRENCY = "SET_BASE_CURRENCY";
+export const SET_EXCHANGE_CURRENCY = "SET_EXCHANGE_CURRENCY";

@@ -1,4 +1,11 @@
-import { ADD_TODO, TOGGLE_TODO, SET_FILTER } from "./actionTypes";
+import {
+  ADD_TODO,
+  TOGGLE_TODO,
+  SET_FILTER,
+  SET_EXCHANGE_CURRENCY,
+  SET_BASE_CURRENCY,
+  SET_EXCHANGE_RATE
+} from "./actionTypes";
 
 let nextTodoId = 0;
 
