@@ -1,12 +1,28 @@
 import { VISIBILITY_FILTERS } from "../constants";
 
 export const getTodosState = store => store.todos;
+// export const getExchangeCurrencyState = store => store.currencyExchangeStore;
 
 export const getTodoList = store =>
   getTodosState(store) ? getTodosState(store).allIds : [];
 
 export const getTodoById = (store, id) =>
   getTodosState(store) ? { ...getTodosState(store).byIds[id], id } : {};
+
+//Exchange currencies selectors
+export const getExchangeCurrencyState = store => store.currencyExchangeStore;
+export const getExchangeRate = store =>
+  getExchangeCurrencyState(store)
+    ? getExchangeCurrencyState(store).exchangeRate
+    : "none specified";
+export const getExchangeCurrency = store =>
+  getExchangeCurrencyState(store)
+    ? getExchangeCurrencyState(store).exchangeCurrency
+    : "none specified";
+export const getBaseCurrency = store =>
+  getBaseCurrency(store)
+    ? getExchangeCurrencyState(store).baseCurrency
+    : "none specified";
 
 /**
  * example of a slightly more complex selector

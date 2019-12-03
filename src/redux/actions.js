@@ -22,4 +22,19 @@ export const toggleTodo = id => ({
   payload: { id }
 });
 
+export const addExchangeRate = exchangeRate => ({
+  type: SET_EXCHANGE_RATE,
+  payload: { exchangeRate }
+});
+
+export const addExchangeCurrency = exchangeCurrency => ({
+  type: SET_EXCHANGE_CURRENCY,
+  payload: { exchangeCurrency }
+});
+
+export const addBaseCurrency = baseCurrency => ({
+  type: SET_BASE_CURRENCY,
+  payload: { baseCurrency }
+});
+
 export const setFilter = filter => ({ type: SET_FILTER, payload: { filter } });
