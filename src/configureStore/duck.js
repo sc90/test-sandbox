@@ -32,7 +32,6 @@ export const getTransaction = createAction(
   params => params
 );
 
-
 //reducer
 const reducer = handleActions(
   {
