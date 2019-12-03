@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
-import * as fromDuck from "./configureStore/duck";
+import {
+  selectBaseCurrency,
+  selectExchangeCurrency,
+  selectExhangeRate,
+  setBaseCurrency, 
+  // setExchangeCurrency, 
+  // setExchangeRate, 
+  initialState,
+} from "./configureStore/duck";
 
 const App = ({
   exchangeRate,
   exchangeCurrency,
   baseCurrency,
-  setBaseCurrency,
-  setExchangeCurrency,
-  setExchangeRate,
-  dispatch
+  onClick
 }) => {
   return (
     <div>
@@ -23,7 +28,7 @@ const App = ({
       <div>
         <b>Base Currency</b>: {baseCurrency}
       </div>
-      <button onClick={() => dispatch(setBaseCurrency("USD"))}>
+      <button onClick={() => onClick("USD")}>
         Change Currency Value
       </button>
     </div>
@@ -34,32 +39,27 @@ App.propTypes = {
   exchangeCurrency: PropTypes.string,
   baseCurrency: PropTypes.string,
   setBaseCurrency: PropTypes.func.isRequired,
-  setExchangeCurrency: PropTypes.func.isRequired,
-  setExchangeRate: PropTypes.func.isRequired,
+  // setExchangeCurrency: PropTypes.func.isRequired,
+  // setExchangeRate: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired
 };
 App.defaultProps = {
-  exchangeRate: fromDuck.initialState.exchangeRate,
-  exchangeCurrency: fromDuck.initialState.exchangeCurrency,
-  baseCurrency: fromDuck.initialState.baseCurrency
+  exchangeRate: initialState.exchangeRate,
+  exchangeCurrency: initialState.exchangeCurrency,
+  baseCurrency: initialState.baseCurrency
 };
 
-//https://github.com/larkintuckerllc/hello-redux-actions/blob/master/async/src/components/App.jsx
-// const mapDispatchToProps = dispatch =>({
-//    return {
-
-//    }
-// });
+const mapDispatchToProps = (dispatch,ownProps)=> ({
+  onClick: () => dispatch(setBaseCurrency(ownProps.baseCurrency)),
+  // on: setExchangeCurrency,
+  // setExchangeRate: setExchangeRate
+});
 
 export default connect(
   state => ({
-    exchangeRate: fromDuck.selectExhangeRate(state),
-    exchangeCurrency: fromDuck.selectExchangeCurrency(state),
-    baseCurrency: fromDuck.selectBaseCurrency(state)
-  }),
-  {
-    setBaseCurrency: fromDuck.setBaseCurrency,
-    setExchangeCurrency: fromDuck.setExchangeCurrency,
-    setExchangeRate: fromDuck.setExchangeRate
-  }
+    exchangeRate: selectExhangeRate(state),
+    exchangeCurrency: selectExchangeCurrency(state),
+    baseCurrency: selectBaseCurrency(state)
+  }), mapDispatchToProps
+
 )(App);
