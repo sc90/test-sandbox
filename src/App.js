@@ -1,7 +1,7 @@
 import React from "react";
 import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
-import { bindActionCreators } from 'redux'
+import { bindActionCreators } from "redux";
 import {
   selectBaseCurrency,
   selectExchangeCurrency,
@@ -20,10 +20,7 @@ const App = props => {
     setBaseCurrency 
   } = props;
 
-  console.log(props);
-  
   const changeBase = () => {
-    console.log("I got triggered");
     setBaseCurrency("USD");
   }
 
@@ -46,16 +43,12 @@ App.propTypes = {
   exchangeRate: PropTypes.number,
   exchangeCurrency: PropTypes.string,
   baseCurrency: PropTypes.string,
-  currentState: PropTypes.object,
   setBaseCurrency: PropTypes.func.isRequired
   // setExchangeCurrency: PropTypes.func.isRequired,
   // setExchangeRate: PropTypes.func.isRequired,
   // dispatch: PropTypes.func.isRequired
 };
 App.defaultProps = {
-  // exchangeRate: initialState.exchangeRate,
-  // exchangeCurrency: initialState.exchangeCurrency,
-  // baseCurrency: initialState.baseCurrency,
   currentState: {},
   exchangeRate: "",
   exchangeCurrency: "",
@@ -69,18 +62,13 @@ const mapDispatchToProps = dispatch => ({
     },
     dispatch,
   )
-  // onClick: () => dispatch(setBaseCurrency(ownProps.baseCurrency))
-  // on: setExchangeCurrency,
-  // setExchangeRate: setExchangeRate
 });
 
 const mapStateToProps = (state) => {
-  console.log(state)
   return {
     exchangeRate: selectExhangeRate(state),
     exchangeCurrency: selectExchangeCurrency(state),
     baseCurrency: selectBaseCurrency(state), 
-    currentState: state   
   }
 }
 
