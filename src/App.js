@@ -3,27 +3,27 @@ import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
 import * as fromDuck from "./configureStore/duck";
 
-function TodoApp({ exchangeRate, exchangeCurrency, baseCurrency }) {
+const App = ({ exchangeRate, exchangeCurrency, baseCurrency }) => {
   return (
     <div>
       <div>
-        <b>exchangeRate</b>: {exchangeRate}
+        <b>Exchange Rate</b>: {exchangeRate}
       </div>
       <div>
-        <b>exchangeCurrency</b>: {exchangeCurrency}
+        <b>Exchange Currency</b>: {exchangeCurrency}
       </div>
       <div>
-        <b>baseCurrency</b>: {baseCurrency}
+        <b>Base Currency</b>: {baseCurrency}
       </div>
     </div>
   );
-}
-TodoApp.propTypes = {
+};
+App.propTypes = {
   exchangeRate: PropTypes.number,
   exchangeCurrency: PropTypes.string,
   baseCurrency: PropTypes.string
 };
-TodoApp.defaultProps = {
+App.defaultProps = {
   exchangeRate: null,
   exchangeCurrency: null,
   baseCurrency: null
@@ -32,4 +32,4 @@ export default connect(state => ({
   exchangeRate: fromDuck.selectExhangeRate(state),
   exchangeCurrency: fromDuck.selectExchangeCurrency(state),
   baseCurrency: fromDuck.selectBaseCurrency(state)
-}))(TodoApp);
+}))(App);

@@ -46,21 +46,6 @@ const reducer = handleActions(
 );
 export default reducer;
 
-//Exchange currencies selectors
-// export const getExchangeCurrencyState = store => store.currencyExchangeStore;
-// export const selectExhangeRate = createSelector(
-//   selectCurrencyExchange,
-//   transaction => transaction.exchangeRate
-// );
-// export const selectExchangeCurrency = createSelector(
-//   selectCurrencyExchange,
-//   transaction => transaction.exchangeCurrency
-// );
-// export const selectBaseCurrency = createSelector(
-//   selectCurrencyExchange,
-//   transaction => transaction.baseCurrency
-// );
-
 export const selectExhangeRate = state => state.exchangeRate;
 export const selectExchangeCurrency = state => state.exchangeCurrency;
 export const selectBaseCurrency = state => state.baseCurrency;
