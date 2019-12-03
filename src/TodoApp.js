@@ -1,18 +1,35 @@
 import React from "react";
-import AddTodo from "./components/AddTodo";
-import CurrenciesDisplay from "./components/CurrenciesDisplay";
-import TodoList from "./components/TodoList";
-import VisibilityFilters from "./components/VisibilityFilters";
-import "./styles.css";
+import { PropTypes } from "prop-types";
+import { connect } from "react-redux";
+import * as fromDuck from "./configureStore/duck";
 
-export default function TodoApp() {
+function TodoApp({ exchangeRate, exchangeCurrency, baseCurrency }) {
   return (
-    <div className="todo-app">
-      <h1>Todo List</h1>
-      <AddTodo />
-      <TodoList />
-      <VisibilityFilters />
-      <CurrenciesDisplay />
+    <div>
+      <div>
+        <b>exchangeRate</b>: {exchangeRate}
+      </div>
+      <div>
+        <b>exchangeCurrency</b>: {exchangeCurrency}
+      </div>
+      <div>
+        <b>baseCurrency</b>: {baseCurrency}
+      </div>
     </div>
   );
 }
+TodoApp.propTypes = {
+  exchangeRate: PropTypes.number,
+  exchangeCurrency: PropTypes.string,
+  baseCurrency: PropTypes.string
+};
+TodoApp.defaultProps = {
+  exchangeRate: null,
+  exchangeCurrency: null,
+  baseCurrency: null
+};
+export default connect(state => ({
+  exchangeRate: fromDuck.selectExhangeRate(state),
+  exchangeCurrency: fromDuck.selectExchangeCurrency(state),
+  baseCurrency: fromDuck.selectBaseCurrency(state)
+}))(TodoApp);
