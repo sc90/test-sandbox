@@ -5,18 +5,17 @@ import {
   selectBaseCurrency,
   selectExchangeCurrency,
   selectExhangeRate,
-  setBaseCurrency, 
-  // setExchangeCurrency, 
-  // setExchangeRate, 
-  initialState,
+  setBaseCurrency, //calling this action
+  // setExchangeCurrency,
+  // setExchangeRate,
+  initialState
 } from "./configureStore/duck";
 
-const App = ({
-  exchangeRate,
-  exchangeCurrency,
-  baseCurrency,
-  onClick
-}) => {
+const App = ({ exchangeRate, exchangeCurrency, baseCurrency, onClick }) => {
+  const changeBase = () => {
+    console.log("I got triggered");
+    onClick("USD");
+  }
   return (
     <div>
       <div>
@@ -28,9 +27,7 @@ const App = ({
       <div>
         <b>Base Currency</b>: {baseCurrency}
       </div>
-      <button onClick={() => onClick("USD")}>
-        Change Currency Value
-      </button>
+      <button onClick={() => changeBase() }>Change Currency Value</button>
     </div>
   );
 };
@@ -38,10 +35,10 @@ App.propTypes = {
   exchangeRate: PropTypes.number,
   exchangeCurrency: PropTypes.string,
   baseCurrency: PropTypes.string,
-  setBaseCurrency: PropTypes.func.isRequired,
+  setBaseCurrency: PropTypes.func.isRequired
   // setExchangeCurrency: PropTypes.func.isRequired,
   // setExchangeRate: PropTypes.func.isRequired,
-  dispatch: PropTypes.func.isRequired
+  // dispatch: PropTypes.func.isRequired
 };
 App.defaultProps = {
   exchangeRate: initialState.exchangeRate,
@@ -49,8 +46,8 @@ App.defaultProps = {
   baseCurrency: initialState.baseCurrency
 };
 
-const mapDispatchToProps = (dispatch,ownProps)=> ({
-  onClick: () => dispatch(setBaseCurrency(ownProps.baseCurrency)),
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  onClick: () => dispatch(setBaseCurrency(ownProps.baseCurrency))
   // on: setExchangeCurrency,
   // setExchangeRate: setExchangeRate
 });
@@ -60,6 +57,6 @@ export default connect(
     exchangeRate: selectExhangeRate(state),
     exchangeCurrency: selectExchangeCurrency(state),
     baseCurrency: selectBaseCurrency(state)
-  }), mapDispatchToProps
-
+  }),
+  mapDispatchToProps
 )(App);
