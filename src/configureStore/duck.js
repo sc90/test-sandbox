@@ -36,17 +36,17 @@ export const getTransaction = createAction(
 //reducer
 const reducer = handleActions(
   {
-    [setExchangeRate]: (state, { exchangeRate }) => ({
+    [setExchangeRate]: (state, { payload }) => ({
       ...state,
-      exchangeRate
+      exchangeRate:payload
     }),
-    [setExchangeCurrency]: (state, { exchangeCurrency }) => ({
+    [setExchangeCurrency]: (state, { payload }) => ({
       ...state,
-      exchangeCurrency
+      exchangeCurrency:payload
     }),
-    [setBaseCurrency]: (state, { baseCurrency }) => ({
+    [setBaseCurrency]: (state, { payload }) => ({
       ...state,
-      baseCurrency
+      baseCurrency: payload
     }),
     [getTransaction]: (state, { fetch }) => ({
       ...state,
@@ -58,6 +58,6 @@ const reducer = handleActions(
 export default reducer;
 
 //Selector
-export const selectExhangeRate = state => state.exchangeRate;
-export const selectExchangeCurrency = state => state.exchangeCurrency;
-export const selectBaseCurrency = state => state.baseCurrency;
+export const selectExhangeRate = state => state.reducer.exchangeRate;
+export const selectExchangeCurrency = state => state.reducer.exchangeCurrency;
+export const selectBaseCurrency = state => state.reducer.baseCurrency;
