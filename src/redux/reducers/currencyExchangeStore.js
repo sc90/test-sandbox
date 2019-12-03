@@ -5,9 +5,9 @@ import {
 } from "../actionTypes";
 
 const initialState = {
-  exchangeRate: "",
-  baseCurrency: "",
-  exchangeCurrency: ""
+  exchangeRate: "3.06",
+  baseCurrency: "SGD",
+  exchangeCurrency: "MYR"
 };
 
 export default function(state = initialState, action) {
