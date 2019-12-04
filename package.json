@@ -5,6 +5,7 @@
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
+    "@stardust-ui/docs-components": "0.40.0",
     "classnames": "2.2.6",
     "react": "16.8.2",
     "react-dom": "16.8.2",
@@ -15,7 +16,8 @@
     "redux-define": "1.1.1",
     "redux-saga": "1.1.3",
     "redux-thunk": "2.3.0",
-    "reselect": "4.0.0"
+    "reselect": "4.0.0",
+    "semantic-ui-react": "0.88.1"
   },
   "devDependencies": {},
   "scripts": {

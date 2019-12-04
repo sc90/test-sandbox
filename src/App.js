@@ -7,25 +7,24 @@ import {
   selectExchangeCurrency,
   selectExhangeRate,
   setBaseCurrency, //calling this action
-  // setExchangeCurrency,
+  setExchangeCurrency,
   // setExchangeRate,
-  // initialState
 } from "./configureStore/duck";
+import Dropdown from "./components/DropdownSemanticUI";
 
 const App = props => {
-  const { 
-    exchangeRate, 
-    exchangeCurrency, 
-    baseCurrency, 
-    setBaseCurrency 
+  const {
+    exchangeRate,
+    exchangeCurrency,
+    baseCurrency,
+    setBaseCurrency,
+    setExchangeCurrency,
   } = props;
-
-  const changeBase = () => {
-    setBaseCurrency("USD");
-  }
 
   return (
     <div>
+      <Dropdown text="Select Base currency" onChange={setBaseCurrency} />
+      <Dropdown text="Select currency to exchange" onChange={setExchangeCurrency} />
       <div>
         <b>Exchange Rate</b>: {exchangeRate}
       </div>
@@ -35,7 +34,6 @@ const App = props => {
       <div>
         <b>Base Currency</b>: {baseCurrency}
       </div>
-      <button onClick={() => changeBase() }>Change Currency Value</button>
     </div>
   );
 };
@@ -43,10 +41,9 @@ App.propTypes = {
   exchangeRate: PropTypes.number,
   exchangeCurrency: PropTypes.string,
   baseCurrency: PropTypes.string,
-  setBaseCurrency: PropTypes.func.isRequired
-  // setExchangeCurrency: PropTypes.func.isRequired,
+  setBaseCurrency: PropTypes.func.isRequired,
+  setExchangeCurrency: PropTypes.func.isRequired,
   // setExchangeRate: PropTypes.func.isRequired,
-  // dispatch: PropTypes.func.isRequired
 };
 App.defaultProps = {
   currentState: {},
@@ -58,21 +55,22 @@ App.defaultProps = {
 const mapDispatchToProps = dispatch => ({
   ...bindActionCreators(
     {
-      setBaseCurrency
+      setBaseCurrency,
+      setExchangeCurrency
     },
-    dispatch,
+    dispatch
   )
 });
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     exchangeRate: selectExhangeRate(state),
     exchangeCurrency: selectExchangeCurrency(state),
-    baseCurrency: selectBaseCurrency(state), 
-  }
-}
+    baseCurrency: selectBaseCurrency(state)
+  };
+};
 
-export default connect( 
+export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(App);
