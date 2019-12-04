@@ -1,15 +1,32 @@
-import { put, takeLatest, all } from 'redux-saga/effects';
-function* fetchCurrencyExchangeRate() {
-  // const json = yield fetch('https://newsapi.org/v1/articles? 
-  //       source= cnn&apiKey=c39a26d9c12f48dba2a5c00e35684ecc')
-  //       .then(response => response.json(), );    
-  // yield put({ type: "NEWS_RECEIVED", json: json.articles, });
+import { put, all } from "redux-saga/effects";
+import { takeLatest } from "redux-saga";
+import {
+  SET_BASE_CURRENCY,
+  SET_CURRENCY_REPONSE,
+  setBaseCurrency
+} from "./duck";
+function* fetchCurrencyExchangeRate(action) {
+  const json = yield fetch(
+    "https://api.exchangeratesapi.io/latest?base=USD"
+  ).then(response => response.json());
+  yield put({ type: SET_CURRENCY_REPONSE, json: JSON.stringify(json) });
 }
 function* actionWatcher() {
-     yield takeLatest('GET_TRANSACTION', fetchCurrencyExchangeRate)
+  console.log("called");
+  yield takeLatest(
+    [
+      // "SET_EXCHANGE_RATE",
+      setBaseCurrency
+      // "SET_EXCHANGE_CURRENCY",
+      // "SET_AMOUNT_TO_CONVERT"
+    ],
+    fetchCurrencyExchangeRate
+  );
 }
 export default function* rootSaga() {
-   yield all([
-   actionWatcher(),
-   ]);
+  yield all(actionWatcher());
+  // yield all([
+  //   yield takeLatest(SET_BASE_CURRENCY, fetchCurrencyExchangeRate)
+  //   // yield takeLatest(CREATE_TODOS, createTodos);
+  // ]);
 }

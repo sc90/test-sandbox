@@ -1,7 +1,7 @@
-import React from 'react';
-import { PropTypes } from 'prop-types';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React from "react";
+import { PropTypes } from "prop-types";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import {
   selectBaseCurrency,
   selectExchangeCurrency,
@@ -9,9 +9,10 @@ import {
   setBaseCurrency,
   setExchangeCurrency,
   setAmountToConvert,
-} from './configureStore/duck';
-import Dropdown from './components/DropdownSemanticUI';
-import InputField from './components/InputFieldSemanticUI';
+  selectAmountToConvert
+} from "./configureStore/duck";
+import Dropdown from "./components/DropdownSemanticUI";
+import InputField from "./components/InputFieldSemanticUI";
 
 const App = props => {
   const {
@@ -21,24 +22,22 @@ const App = props => {
     setBaseCurrency,
     setExchangeCurrency,
     setAmountToConvert,
+    amountToConvert
   } = props;
 
   return (
     <div>
       <Dropdown text="Select Base currency" onChange={setBaseCurrency} />
-      <Dropdown text="Select currency to exchange" onChange={setExchangeCurrency} />
+      <Dropdown
+        text="Select currency to exchange"
+        onChange={setExchangeCurrency}
+      />
+      <InputField onChange={setAmountToConvert} />
+      <div>
+        <b>Total Converted Amount</b>: {amountToConvert * exchangeRate}
+      </div>
       <div>
         <b>Exchange Rate</b>: {exchangeRate}
-      </div>
-      <div>
-        <b>Exchange Currency</b>: {exchangeCurrency}
-      </div>
-      <div>
-        <b>Base Currency</b>: {baseCurrency}
-      </div>
-      <InputField onChange={setAmountToConvert}/>
-      <div>
-        <b>Total Converted Amount</b>: {baseCurrency}
       </div>
     </div>
   );
@@ -49,7 +48,7 @@ App.propTypes = {
   baseCurrency: PropTypes.string,
   setBaseCurrency: PropTypes.func.isRequired,
   setExchangeCurrency: PropTypes.func.isRequired,
-  setAmountToConvert: PropTypes.func.isRequired,
+  setAmountToConvert: PropTypes.func.isRequired
 };
 App.defaultProps = {
   currentState: {},
@@ -63,7 +62,7 @@ const mapDispatchToProps = dispatch => ({
     {
       setBaseCurrency,
       setExchangeCurrency,
-      setAmountToConvert,
+      setAmountToConvert
     },
     dispatch
   )
@@ -73,7 +72,8 @@ const mapStateToProps = state => {
   return {
     exchangeRate: selectExhangeRate(state),
     exchangeCurrency: selectExchangeCurrency(state),
-    baseCurrency: selectBaseCurrency(state)
+    baseCurrency: selectBaseCurrency(state),
+    amountToConvert: selectAmountToConvert(state)
   };
 };
 

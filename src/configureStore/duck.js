@@ -1,12 +1,12 @@
-import { defineAction } from 'redux-define';
-import { createAction, handleActions } from 'redux-actions';
+import { defineAction } from "redux-define";
+import { createAction, handleActions } from "redux-actions";
 
 export const initialState = {
   exchangeRate: 3.06,
   baseCurrency: "SGD",
   exchangeCurrency: "MYR",
-  amountToConvert:0.0,
-  fetch:false,
+  amountToConvert: 0.0,
+  currencyResponse: ""
 };
 
 //Action-types
@@ -14,7 +14,7 @@ export const SET_EXCHANGE_RATE = defineAction("SET_EXCHANGE_RATE");
 export const SET_BASE_CURRENCY = defineAction("SET_BASE_CURRENCY");
 export const SET_EXCHANGE_CURRENCY = defineAction("SET_EXCHANGE_CURRENCY");
 export const SET_AMOUNT_TO_CONVERT = defineAction("SET_AMOUNT_TO_CONVERT");
-export const GET_TRANSACTION = defineAction("GET_TRANSACTION");
+export const SET_CURRENCY_REPONSE = defineAction("SET_CURRENCY_REPONSE");
 
 //Action-creators
 export const setExchangeRate = createAction(
@@ -33,8 +33,8 @@ export const setAmountToConvert = createAction(
   SET_BASE_CURRENCY,
   params => params
 );
-export const getTransaction = createAction(
-  GET_TRANSACTION,
+export const setCurrencyResponse = createAction(
+  SET_CURRENCY_REPONSE,
   params => params
 );
 
@@ -43,11 +43,11 @@ const reducer = handleActions(
   {
     [setExchangeRate]: (state, { payload }) => ({
       ...state,
-      exchangeRate:payload
+      exchangeRate: payload
     }),
     [setExchangeCurrency]: (state, { payload }) => ({
       ...state,
-      exchangeCurrency:payload
+      exchangeCurrency: payload
     }),
     [setBaseCurrency]: (state, { payload }) => ({
       ...state,
@@ -57,9 +57,9 @@ const reducer = handleActions(
       ...state,
       amountToConvert: payload
     }),
-    [getTransaction]: (state, { fetch }) => ({
+    [setCurrencyResponse]: (state, { payload }) => ({
       ...state,
-      fetch
+      currencyResponse: payload
     })
   },
   initialState
@@ -70,3 +70,4 @@ export default reducer;
 export const selectExhangeRate = state => state.reducer.exchangeRate;
 export const selectExchangeCurrency = state => state.reducer.exchangeCurrency;
 export const selectBaseCurrency = state => state.reducer.baseCurrency;
+export const selectAmountToConvert = state => state.reducer.amountToConvert;
