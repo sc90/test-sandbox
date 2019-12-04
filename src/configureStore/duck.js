@@ -5,6 +5,7 @@ export const initialState = {
   exchangeRate: 3.06,
   baseCurrency: "SGD",
   exchangeCurrency: "MYR",
+  amountToConvert:0.0,
   fetch:false,
 };
 
@@ -12,6 +13,7 @@ export const initialState = {
 export const SET_EXCHANGE_RATE = defineAction("SET_EXCHANGE_RATE");
 export const SET_BASE_CURRENCY = defineAction("SET_BASE_CURRENCY");
 export const SET_EXCHANGE_CURRENCY = defineAction("SET_EXCHANGE_CURRENCY");
+export const SET_AMOUNT_TO_CONVERT = defineAction("SET_AMOUNT_TO_CONVERT");
 export const GET_TRANSACTION = defineAction("GET_TRANSACTION");
 
 //Action-creators
@@ -24,6 +26,10 @@ export const setExchangeCurrency = createAction(
   params => params
 );
 export const setBaseCurrency = createAction(
+  SET_BASE_CURRENCY,
+  params => params
+);
+export const setAmountToConvert = createAction(
   SET_BASE_CURRENCY,
   params => params
 );
@@ -46,6 +52,10 @@ const reducer = handleActions(
     [setBaseCurrency]: (state, { payload }) => ({
       ...state,
       baseCurrency: payload
+    }),
+    [setAmountToConvert]: (state, { payload }) => ({
+      ...state,
+      amountToConvert: payload
     }),
     [getTransaction]: (state, { fetch }) => ({
       ...state,

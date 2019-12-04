@@ -6,11 +6,12 @@ import {
   selectBaseCurrency,
   selectExchangeCurrency,
   selectExhangeRate,
-  setBaseCurrency, //calling this action
+  setBaseCurrency,
   setExchangeCurrency,
-  // setExchangeRate,
+  setAmountToConvert,
 } from "./configureStore/duck";
 import Dropdown from "./components/DropdownSemanticUI";
+import InputField from "./components/InputFieldSemanticUI";
 
 const App = props => {
   const {
@@ -19,6 +20,7 @@ const App = props => {
     baseCurrency,
     setBaseCurrency,
     setExchangeCurrency,
+    setAmountToConvert,
   } = props;
 
   return (
@@ -34,6 +36,10 @@ const App = props => {
       <div>
         <b>Base Currency</b>: {baseCurrency}
       </div>
+      <InputField onChange={setAmountToConvert}/>
+      <div>
+        <b>Total Converted Amount</b>: {baseCurrency}
+      </div>
     </div>
   );
 };
@@ -43,7 +49,7 @@ App.propTypes = {
   baseCurrency: PropTypes.string,
   setBaseCurrency: PropTypes.func.isRequired,
   setExchangeCurrency: PropTypes.func.isRequired,
-  // setExchangeRate: PropTypes.func.isRequired,
+  setAmountToConvert: PropTypes.func.isRequired,
 };
 App.defaultProps = {
   currentState: {},
@@ -56,7 +62,8 @@ const mapDispatchToProps = dispatch => ({
   ...bindActionCreators(
     {
       setBaseCurrency,
-      setExchangeCurrency
+      setExchangeCurrency,
+      setAmountToConvert,
     },
     dispatch
   )
