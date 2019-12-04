@@ -1,11 +1,11 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { createStore, applyMiddleware, compose } from "redux";
-import ReduxThunk from "redux-thunk";
-import reducers from "./configureStore/reducers";
-import { Provider } from "react-redux";
-import App from "./App";
-import rootSaga from "./configureStore/saga";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { createStore, applyMiddleware, compose } from 'redux';
+import ReduxThunk from 'redux-thunk';
+import reducers from './configureStore/reducers';
+import { Provider } from 'react-redux';
+import App from './App';
+import rootSaga from './configureStore/saga';
 import createSagaMiddleware from "redux-saga";
 
 const sagaMiddleware = createSagaMiddleware();

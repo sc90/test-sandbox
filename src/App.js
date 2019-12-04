@@ -1,7 +1,7 @@
-import React from "react";
-import { PropTypes } from "prop-types";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import React from 'react';
+import { PropTypes } from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import {
   selectBaseCurrency,
   selectExchangeCurrency,
@@ -9,9 +9,9 @@ import {
   setBaseCurrency,
   setExchangeCurrency,
   setAmountToConvert,
-} from "./configureStore/duck";
-import Dropdown from "./components/DropdownSemanticUI";
-import InputField from "./components/InputFieldSemanticUI";
+} from './configureStore/duck';
+import Dropdown from './components/DropdownSemanticUI';
+import InputField from './components/InputFieldSemanticUI';
 
 const App = props => {
   const {

@@ -1,6 +1,7 @@
-import React from "react";
-import { Dropdown } from "semantic-ui-react";
+import React from 'react';
+import { Dropdown } from 'semantic-ui-react';
 
+//hardcoding allowable values for now
 const countryCurrencies = [
   {
     key: 'MYR',
@@ -15,7 +16,7 @@ const countryCurrencies = [
   {
     key: 'SGD',
     text: 'Singapore Dollar',
-    value: "SGD"
+    value: 'SGD'
   },
   {
     key: 'USD',

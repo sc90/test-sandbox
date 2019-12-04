@@ -1,5 +1,5 @@
-import { combineReducers } from "redux";
-import reducer from "./duck";
+import { combineReducers } from 'redux';
+import reducer from './duck';
 
 const reducers = {
   reducer

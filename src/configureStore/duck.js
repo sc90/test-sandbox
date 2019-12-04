@@ -1,5 +1,5 @@
-import { defineAction } from "redux-define";
-import { createAction, handleActions } from "redux-actions";
+import { defineAction } from 'redux-define';
+import { createAction, handleActions } from 'redux-actions';
 
 export const initialState = {
   exchangeRate: 3.06,

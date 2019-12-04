@@ -1,6 +1,5 @@
-import React from "react";
-import { Input } from "semantic-ui-react";
-
+import React from 'react';
+import { Input } from 'semantic-ui-react';
 
 const InputFieldSemanticUI = props => {
   const inputChange = (event, { value }) => {
@@ -16,4 +15,4 @@ const InputFieldSemanticUI = props => {
   return <Input placeholder="Enter amount to convert" onChange={inputChange}/>;
 };
 
-export default InputFieldSemanticUI;
+export default InputFieldSemanticUI; 
