@@ -4,16 +4,14 @@ import {
   FETCH_API_ERROR,
   SET_AMOUNT_TO_CONVERT,
   SET_BASE_CURRENCY,
-  SET_EXCHANGE_CURRENCY,
-  SET_EXCHANGE_RATE
+  SET_EXCHANGE_CURRENCY
 } from "./action";
 
 export const initialState = {
-  exchangeRate: 3.06,
+  exchangeRate: {},
   baseCurrency: "SGD",
-  exchangeCurrency: "MYR",
-  amountToConvert: 0.0,
-  response: ""
+  exchangeCurrency: "SGD",
+  amountToConvert: 0.0
 };
 
 export function reducer(state = initialState, action) {
@@ -27,7 +25,7 @@ export function reducer(state = initialState, action) {
       return {
         ...state,
         pending: false,
-        response: action.response
+        exchangeRates: action.response
       };
     case FETCH_API_ERROR:
       return {
@@ -53,22 +51,13 @@ export function reducer(state = initialState, action) {
         pending: false,
         exchangeCurrency: action.exchangeCurrency
       };
-    case SET_EXCHANGE_RATE:
-      return {
-        ...state,
-        pending: false,
-        exchangeRate: action.exchangeRate
-      };
     default:
       return state;
   }
 }
 
 //Selector
-export const selectExhangeRate = state => state.reducer.exchangeRate;
+export const selectExhangeRate = state => state.reducer.exchangeRates;
 export const selectExchangeCurrency = state => state.reducer.exchangeCurrency;
 export const selectBaseCurrency = state => state.reducer.baseCurrency;
 export const selectAmountToConvert = state => state.reducer.amountToConvert;
-export const getProducts = state => state.reducer.response;
-export const getProductsPending = state => state.reducer.pending;
-export const getProductsError = state => state.reducer.error;

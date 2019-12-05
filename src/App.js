@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -11,20 +11,34 @@ import {
 import {
   setBaseCurrency,
   setExchangeCurrency,
-  setAmountToConvert,
-} from './configureStore/action'
-
+  setAmountToConvert
+} from "./configureStore/action";
+import { fetchCurrencyExchange } from "./fetchAPI/fetchCurrencyExchange";
 import Dropdown from "./components/DropdownSemanticUI";
 import InputField from "./components/InputFieldSemanticUI";
 
 const App = props => {
   const {
-    exchangeRate,
+    exchangeRates,
     setBaseCurrency,
     setExchangeCurrency,
     setAmountToConvert,
-    amountToConvert
+    amountToConvert,
+    fetchCurrencyExchange,
+    baseCurrency,
+    exchangeCurrency
   } = props;
+
+  useEffect(() => {
+    fetchCurrencyExchange(
+      "https://api.exchangeratesapi.io/latest?base=" + baseCurrency
+    );
+  }, [baseCurrency]);
+
+  let rate = 0.0;
+  if (exchangeRates != null) {
+    rate = exchangeRates[exchangeCurrency];
+  }
 
   return (
     <div>
@@ -35,25 +49,26 @@ const App = props => {
       />
       <InputField onChange={setAmountToConvert} />
       <div>
-        <b>Total Converted Amount</b>: {amountToConvert * exchangeRate}
+        <b>Total Converted Amount</b>: {amountToConvert * rate}
       </div>
       <div>
-        <b>Exchange Rate</b>: {exchangeRate}
+        <b>Exchange Rate</b>: {rate}
       </div>
     </div>
   );
 };
 App.propTypes = {
-  exchangeRate: PropTypes.number,
+  exchangeRates: PropTypes.object,
   exchangeCurrency: PropTypes.string,
   baseCurrency: PropTypes.string,
   setBaseCurrency: PropTypes.func,
   setExchangeCurrency: PropTypes.func,
-  setAmountToConvert: PropTypes.func
+  setAmountToConvert: PropTypes.func,
+  fetchCurrencyExchange: PropTypes.func
 };
 App.defaultProps = {
   currentState: {},
-  exchangeRate: "",
+  exchangeRates: null,
   exchangeCurrency: "",
   baseCurrency: ""
 };
@@ -63,16 +78,16 @@ const mapDispatchToProps = dispatch => ({
     {
       setBaseCurrency,
       setExchangeCurrency,
-      setAmountToConvert
+      setAmountToConvert,
+      fetchCurrencyExchange
     },
     dispatch
   )
 });
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
-    exchangeRate: selectExhangeRate(state),
+    exchangeRates: selectExhangeRate(state),
     exchangeCurrency: selectExchangeCurrency(state),
     baseCurrency: selectBaseCurrency(state),
     amountToConvert: selectAmountToConvert(state)
