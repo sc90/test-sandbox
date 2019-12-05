@@ -6,19 +6,20 @@ import {
   selectBaseCurrency,
   selectExchangeCurrency,
   selectExhangeRate,
+  selectAmountToConvert
+} from "./configureStore/reducer";
+import {
   setBaseCurrency,
   setExchangeCurrency,
   setAmountToConvert,
-  selectAmountToConvert
-} from "./configureStore/duck";
+} from './configureStore/action'
+
 import Dropdown from "./components/DropdownSemanticUI";
 import InputField from "./components/InputFieldSemanticUI";
 
 const App = props => {
   const {
     exchangeRate,
-    exchangeCurrency,
-    baseCurrency,
     setBaseCurrency,
     setExchangeCurrency,
     setAmountToConvert,
@@ -46,9 +47,9 @@ App.propTypes = {
   exchangeRate: PropTypes.number,
   exchangeCurrency: PropTypes.string,
   baseCurrency: PropTypes.string,
-  setBaseCurrency: PropTypes.func.isRequired,
-  setExchangeCurrency: PropTypes.func.isRequired,
-  setAmountToConvert: PropTypes.func.isRequired
+  setBaseCurrency: PropTypes.func,
+  setExchangeCurrency: PropTypes.func,
+  setAmountToConvert: PropTypes.func
 };
 App.defaultProps = {
   currentState: {},
@@ -69,6 +70,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => {
+  console.log(state);
   return {
     exchangeRate: selectExhangeRate(state),
     exchangeCurrency: selectExchangeCurrency(state),
